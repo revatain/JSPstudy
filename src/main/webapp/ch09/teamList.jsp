@@ -5,8 +5,16 @@
 <jsp:useBean id="mgr" class="ch09.TeamMgr"/>
 <%
 		Vector<TeamBean> vlist = mgr.listTeam();
-		out.println(vlist.size());
+		//out.println(vlist.size());
 %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Team Mgr</title>
+<link href="style.css" rel="stylesheet"  type="text/css">
+</head>
+<body>
 <div align="center">
 <h1>Team List</h1>
 <table border="1">
@@ -23,7 +31,7 @@
 				%>
 				<tr>
 				<td><%=bean.getNum()%></td>
-				<td><%=bean.getName()%></td>
+				<td><a href="teamRead.jsp?num=<%=bean.getNum()%>"><%=bean.getName()%></a></td>
 				<td><%=bean.getCity()%></td>
 				<td><%=bean.getAge()%></td>
 				<td><%=bean.getTeam()%></td>
@@ -32,5 +40,6 @@
 	<% 
 			}
 	%>
-</table>
+</table><p>
+<a href = "teamInsert.html" >INSERT</a>
 </div>
