@@ -54,7 +54,6 @@ public class TeamMgr {
 			pstmt.setString(2, bean.getCity());
 			pstmt.setInt(3, bean.getAge());
 			pstmt.setString(4, bean.getTeam());
-
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,6 +134,32 @@ public class TeamMgr {
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
+	}
+	public Vector <String> teamList(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<String> vlist = new Vector<String> ();
+		try {
+			con = pool.getConnection();
+			sql = "select distinct team from tblTeam";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				vlist.addElement(rs.getString(1));
+			}
+			System.out.println(vlist.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
+	public static void main(String[] args) {
+		TeamMgr mgr = new TeamMgr();
+		mgr.teamList();
 	}
 }
 // java : member, memberMgr
