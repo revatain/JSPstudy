@@ -6,6 +6,10 @@
 <jsp:setProperty property="*" name="login"/>
 <%
 		String url = "login.jsp";
+		if(request.getParameter("url")!=null&&!request.getParameter("url").equals("null")){
+			url = request.getParameter("url");
+		}
+		
 		boolean result = mgr.loginJoin(login.getId(), login.getPwd());
 		// out.print(result);
 		String msg = "로그인 실패";

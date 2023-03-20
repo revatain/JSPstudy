@@ -3,10 +3,11 @@
 <jsp:useBean id="login" class="guestbook.JoinBean" scope="session"/>
 <%
 		String id = (String)session.getAttribute("idKey");
+		String url = request.getParameter("url");
 %>
 <title>로그인</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<body bgcolor="#996600">
+<body bgcolor="#F23F4F">
 <br><br>
 <div align="center">
 <%
@@ -32,12 +33,15 @@
 	</tr>
 	<tr>
 		<td align="center" colspan="2">
+		<input type="hidden" name="url" value="<%=url%>">
 		<INPUT TYPE="submit" value="로그인">
 		</td>
 	</tr>
 </table>
+
 </form>
 <%}%>
+
 </div>
 </body>
 
