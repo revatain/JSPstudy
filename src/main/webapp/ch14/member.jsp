@@ -1,3 +1,4 @@
+<!-- member.jsp -->
 <%@page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html>
@@ -19,6 +20,7 @@
 	function zipSearch() {
 		url = "zipSearch.jsp?search=n";
 		window.open(url, "우편번호검색", "width=500, height=300, top=100, left=100, scrollbars=yes");
+	
 	}
 </script>
 </head>
@@ -76,7 +78,7 @@
 								<td>Email</td>
 								<td><input name="email" size="30">
 								</td>
-								<td>이메일을 적어 주세요.</td>
+								<td>이메일를 적어 주세요.</td>
 							</tr>
 							<tr>
 								<td>우편번호</td>

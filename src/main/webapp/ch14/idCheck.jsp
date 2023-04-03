@@ -1,9 +1,10 @@
+<!-- idCheck.jsp -->
 <%@page contentType="text/html; charset=UTF-8"%>
 <jsp:useBean id="mgr" class="ch14.MemberMgr"/>
 <%
 		String id = request.getParameter("id");
 		boolean result = mgr.checkId(id);
-		out.print(result);
+		//out.print(result);
 %>
 <!doctype html>
 <html>
@@ -21,7 +22,7 @@
 			out.println("는 사용 가능합니다.<p/>");
 		}
 %>
-<a1 href="#" onclick="self.close()">닫기</a>
+<a href="#" onclick="self.close()">닫기</a>
 </div>
 </body>
 </html>

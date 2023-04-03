@@ -1,14 +1,20 @@
 package guestbook;
 
 public class JoinBean {
-
+	
 	private String id;
 	private String pwd;
 	private String name;
 	private String email;
 	private String hp;
 	private String grade;
-	
+
+	public String getHp() {
+		return hp;
+	}
+	public void setHp(String hp) {
+		this.hp = hp;
+	}
 	public String getId() {
 		return id;
 	}
@@ -33,16 +39,12 @@ public class JoinBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getHp() {
-		return hp;
-	}
-	public void setHp(String hp) {
-		this.hp = hp;
-	}
+
 	public String getGrade() {
 		return grade;
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+	
 }

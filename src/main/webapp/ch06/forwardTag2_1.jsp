@@ -5,5 +5,5 @@
 		String name = "홍길동";
 %>
 <jsp:forward page='<%=bloodType+".jsp"%>'>
-<jsp:param name="name" value="<%=name%>" />
+	<jsp:param value="<%=name%>" name="name"/>
 </jsp:forward>

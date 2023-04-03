@@ -28,4 +28,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/main/webapp/se2</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Users/dita810/Desktop/se2</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

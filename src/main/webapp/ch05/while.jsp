@@ -1,4 +1,3 @@
-<!-- ch05/while.jsp -->
 <%@page import="ch05.MyUtil"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <%

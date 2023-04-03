@@ -12,34 +12,50 @@
 <head>
 <meta charset="UTF-8">
 <title>Team Mgr</title>
-<link href="style.css" rel="stylesheet"  type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div align="center">
 <h1>Team List</h1>
 <table border="1">
-<tr>
+		<tr>
 			<th>번호</th>
 			<th>이름</th>
 			<th>사는곳</th>
 			<th>나이</th>
 			<th>팀명</th>
 	</tr>
-	<% 
-			for(int i = 0; i<vlist.size(); i++) {
+	<%
+			for(int i=0;i<vlist.size();i++){
 				TeamBean bean = vlist.get(i);
-				%>
-				<tr>
-				<td><%=bean.getNum()%></td>
-				<td><a href="teamRead.jsp?num=<%=bean.getNum()%>"><%=bean.getName()%></a></td>
-				<td><%=bean.getCity()%></td>
-				<td><%=bean.getAge()%></td>
-				<td><%=bean.getTeam()%></td>
-			
-			</tr>
+	%>	
+	<tr align="center">
+		<td><%=bean.getNum() %></td>
+		<td>
+			<a href="teamRead.jsp?num=<%=bean.getNum()%>"><%=bean.getName() %></a>
+		</td>
+		<td><%=bean.getCity() %> </td>
+		<td><%=bean.getAge() %> </td>
+		<td><%=bean.getTeam() %> </td>
+	</tr>			
 	<% 
-			}
+			}//--for
 	%>
 </table><p>
-<a href = "teamInsert.html" >INSERT</a>
+<a href="teamInsert.jsp">INSERT</a>
 </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

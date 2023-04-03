@@ -3,9 +3,10 @@
 <%
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
-		// 세션에 idkey라 이름으로 id를 저장
+		
+		//세션에 idkey라 이름으로 id를 저장
 		session.setAttribute("idKey", id);
-		session.setMaxInactiveInterval(60*3);
+		session.setMaxInactiveInterval(60*3);//3분
 %>
 <h1>Session Example1</h1>
 <form method="post" action="session1_1.jsp">

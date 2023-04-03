@@ -45,15 +45,15 @@
 							</tr>
 							<tr>
 								<td>이름</td>
-								<td><input name="name" size="15"							
+								<td><input name="name" size="15"
 									value="<%=bean.getName()%>"></td>
 							</tr>
 							<tr>
 								<td>성별</td>
 								<td>
-									남<input type="radio" name="gender" value="1"
+									남<input type="radio" name="gender" value="1" 
 									<%if(bean.getGender().equals("1")) out.print("checked");%>>
-									여<input type="radio" name="gender" value="2"
+									여<input type="radio" name="gender" value="2" 
 									<%if(bean.getGender().equals("2")) out.print("checked");%>>
 								</td>
 							</tr>
@@ -87,7 +87,7 @@
 								%>
 								<%=list[i] %>
 								<input type="checkbox" name="hobby" value="<%=list[i]%>" 
-								<%=hb[i].equals("1")?"checked":"" %>>
+								<%=hb[i].equals("1")?"checked":""%>>
 								<%}//---for%>	
 								</td>
 							</tr>

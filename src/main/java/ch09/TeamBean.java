@@ -1,8 +1,9 @@
 package ch09;
 
 public class TeamBean {
+	
 	private int num;
-	private String name;
+	private String  name;
 	private String city;
 	private int age;
 	private String team;
@@ -37,4 +38,7 @@ public class TeamBean {
 	public void setTeam(String team) {
 		this.team = team;
 	}
+	
+	
+
 }

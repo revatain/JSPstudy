@@ -1,6 +1,7 @@
 package guestbook;
 
 public class GuestBookBean {
+	
 	private int num;
 	private String id;
 	private String contents;
@@ -8,7 +9,7 @@ public class GuestBookBean {
 	private String regdate;
 	private String regtime;
 	private String secret;
-	
+
 	public int getNum() {
 		return num;
 	}
@@ -51,4 +52,5 @@ public class GuestBookBean {
 	public void setSecret(String secret) {
 		this.secret = secret;
 	}
+	
 }

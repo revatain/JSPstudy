@@ -7,7 +7,7 @@
 %>
 <title>로그인</title>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<body bgcolor="#F23F4F">
+<body bgcolor="#996600">
 <br><br>
 <div align="center">
 <%
@@ -34,14 +34,12 @@
 	<tr>
 		<td align="center" colspan="2">
 		<input type="hidden" name="url" value="<%=url%>">
-		<INPUT TYPE="submit" value="로그인">
+		<input type="submit" value="로그인">
 		</td>
 	</tr>
 </table>
-
 </form>
 <%}%>
-
 </div>
 </body>
 

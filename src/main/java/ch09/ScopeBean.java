@@ -1,6 +1,7 @@
 package ch09;
 
 public class ScopeBean {
+	
 	private int num;
 
 	public int getNum() {
@@ -10,5 +11,5 @@ public class ScopeBean {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
+
 }

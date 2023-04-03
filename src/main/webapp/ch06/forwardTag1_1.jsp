@@ -5,4 +5,4 @@
 		String pwd = request.getParameter("pwd");
 %>
 <%-- id : <%=id %> / pwd : <%=pwd %> --%>
-<jsp:forward page="forwardTag1_2.jsp"/>
+<jsp:forward page="forward1_2.jsp"/>

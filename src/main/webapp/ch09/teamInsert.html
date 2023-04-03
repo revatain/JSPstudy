@@ -6,43 +6,41 @@
 <title>Team Mgr</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-function check() {
-	f = document.frm;
-	if(f.name.value=="") {
-		alert("이름 입력하세요");
-		f.name.focus();
-		return;
-	}
-	if(f.city.value=="") {
-		alert("사는곳 입력하세요");
-		f.city.focus();
-		return;
+	function check() {
+		f = document.frm;
+		if(f.name.value==""){
+			alert("이름 입력하세요");
+			f.name.focus();
+			return;//함수 빠져나옴
+		}
+		if(f.city.value==""){
+			alert("사는곳 입력하세요");
+			f.city.focus();
+			return;//함수 빠져나옴
+		}
+		if(f.age.value==""){
+			alert("나이 입력하세요");
+			f.age.focus();
+			return;//함수 빠져나옴
+		}
+		if(f.team.value==""){
+			alert("팀 입력하세요");
+			f.team.focus();
+			return;//함수 빠져나옴
+		}
+		f.submit();//제출
 	}
 
-	if(f.age.value=="") {
-		alert("나이 입력하세요");
-		f.age.focus();
-		return;
+	function check2() {
+		document.frm.action = "teamInsertProc2.jsp";
+		document.frm.submit();
 	}
-	
-	if(f.team.value=="") {
-		alert("이름 입력하세요");
-		f.team.focus();
-		return;
-	}
-	f.submit();
-}
-
-function check2() {
-	document.frm.action = "teamInsertProc2.jsp";
-	document.frm.submit();
-}
 </script>
 </head>
 <body>
-<div align = "center">
+<div align="center">
 <h1>Team Insert</h1>
-<form name = "frm" method = "post" action="teamInsertProc.jsp">
+<form name="frm" method="post" action="teamInsertProc.jsp">
 <table border="1">
 <tr>
 	<td width="50" align="center">이름</td>
@@ -68,7 +66,12 @@ function check2() {
 </tr>
 </table>
 </form><p>
-<a href = "teamList.jsp">LIST</a>
+<a href="teamList.jsp">LIST</a>
 </div>
 </body>
 </html>
+
+
+
+
+

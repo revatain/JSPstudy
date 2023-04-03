@@ -5,7 +5,7 @@
 		SimpleBean bean = new SimpleBean();
 		String msg = request.getParameter("msg");
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
-		// 넘겨받은 값들을 DB연동을 위해 Beans에 저장
+		//넘겨받은 값들을 Beans에 저장 why-> DB연동을 위해서
 		bean.setMsg(msg);
 		bean.setCnt(cnt);
 %>

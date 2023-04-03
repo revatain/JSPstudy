@@ -3,16 +3,17 @@ package ch14;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class MemberMgr {
+
 	private DBConnectionMgr pool;
 
 	public MemberMgr() {
 		pool = DBConnectionMgr.getInstance();
 	}
 
+	// 로그인 : 성공 -> true
 	public boolean loginMember(String id, String pwd) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -21,7 +22,7 @@ public class MemberMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "select id from tblMember where id = ? and pwd =?";
+			sql = "select id from tblMember where  id = ? and pwd = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pwd);
@@ -32,11 +33,10 @@ public class MemberMgr {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-
 		return flag;
 	}
 
-	// id 중복 체크
+	// id 중복 체크 : 중복 ->true
 	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -58,7 +58,7 @@ public class MemberMgr {
 		return flag;
 	}
 
-	// 주소 검색
+	// 주소검색
 	public Vector<ZipcodeBean> searchZipcode(String area3) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -67,19 +67,13 @@ public class MemberMgr {
 		Vector<ZipcodeBean> vlist = new Vector<ZipcodeBean>();
 		try {
 			con = pool.getConnection();
-			sql = "select * from tblZipcode " + "where area3 like ?";
+			sql = "select * from tblZipcode where area3 like ?";
 			pstmt = con.prepareStatement(sql);
+			// ? -> '%강남대로%'
 			pstmt.setString(1, "%" + area3 + "%");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				ZipcodeBean bean = 
-						new ZipcodeBean(rs.getString(1), rs.getString(2), 
-						rs.getString(3), rs.getString(4));
-				
-//				bean.setZipcode(rs.getString(1));
-//				bean.setArea1(rs.getString(2));
-//				bean.setArea2(rs.getString(3));
-//				bean.setArea3(rs.getString(4));
+				ZipcodeBean bean = new ZipcodeBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
 				vlist.addElement(bean);
 			}
 		} catch (Exception e) {
@@ -89,7 +83,8 @@ public class MemberMgr {
 		}
 		return vlist;
 	}
-	// 회원 가입
+
+	// 회원가입
 	public boolean insertMember(MemberBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -97,8 +92,7 @@ public class MemberMgr {
 		boolean flag = false;
 		try {
 			con = pool.getConnection();
-			sql = "insert tblMember(id,pwd,name,gender,"
-					+ "birthday,email,zipcode,address,hobby,job)"
+			sql = "insert tblMember(id,pwd,name,gender," + "birthday,email,zipcode,address,hobby,job)"
 					+ "values(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getId());
@@ -109,26 +103,23 @@ public class MemberMgr {
 			pstmt.setString(6, bean.getEmail());
 			pstmt.setString(7, bean.getZipcode());
 			pstmt.setString(8, bean.getAddress());
-			
-			/////////////////////////////////////////////////
-			
-			String lists[] = {"인터넷", "여행", "게임", "영화", "운동"};
-			String hobby [] = bean.getHobby();
-			char hb[] = {'0', '0', '0', '0', '0'};
+			/////////////////////////////////
+			String lists[] = { "인터넷", "여행", "게임", "영화", "운동" };
+			String hobby[] = bean.getHobby();// {"인터넷", "운동"};
+			char hb[] = { '0', '0', '0', '0', '0' };
 			for (int i = 0; i < hobby.length; i++) {
 				for (int j = 0; j < lists.length; j++) {
-					if(hobby[i].equals(lists[j])) {
+					if (hobby[i].equals(lists[j])) {
 						hb[j] = '1';
 						break;
 					}
 				}
 			}
-			
+			// 10001
 			pstmt.setString(9, new String(hb));
-			//////////////////////////////////////////////////
-			
+			/////////////////////////////////
 			pstmt.setString(10, bean.getJob());
-			if(pstmt.executeUpdate()==1)
+			if (pstmt.executeUpdate() == 1)
 				flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,8 +128,8 @@ public class MemberMgr {
 		}
 		return flag;
 	}
-	
-	// 회원 정보 가져오기
+
+	// 회원정보가져오기
 	public MemberBean getMember(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -149,7 +140,7 @@ public class MemberMgr {
 			con = pool.getConnection();
 			sql = "select * from tblMember where id = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt.setString(1, id);//id = 'aaa'
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				bean.setId(rs.getString("id"));
@@ -163,8 +154,8 @@ public class MemberMgr {
 				String hobby = rs.getString("hobby");
 				String hb[] = new String[hobby.length()];
 				for (int i = 0; i < hb.length; i++) {
-					hb[i] = hobby.substring(i, i+1);
-				}
+					hb[i] = hobby.substring(i ,i+1);
+				}//01010 -> {"0","1","0","1","0"}
 				bean.setHobby(hb);
 				bean.setJob(rs.getString("job"));
 			}
@@ -173,10 +164,10 @@ public class MemberMgr {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return bean;		
+		return bean;
 	}
-	
-	// 회원 수정
+
+	// 회원수정 : id를 제외한 모든 값을 수정
 	public boolean updateMember(MemberBean bean) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -195,24 +186,21 @@ public class MemberMgr {
 			pstmt.setString(5, bean.getEmail());
 			pstmt.setString(6, bean.getZipcode());
 			pstmt.setString(7, bean.getAddress());
-			
-			/////////////////////////////////////////////////
-			
-			String lists[] = {"인터넷", "여행", "게임", "영화", "운동"};
-			String hobby [] = bean.getHobby();
-			char hb[] = {'0', '0', '0', '0', '0'};
+			/////////////////////////////////
+			String lists[] = { "인터넷", "여행", "게임", "영화", "운동" };
+			String hobby[] = bean.getHobby();// {"인터넷", "운동"};
+			char hb[] = { '0', '0', '0', '0', '0' };
 			for (int i = 0; i < hobby.length; i++) {
 				for (int j = 0; j < lists.length; j++) {
-					if(hobby[i].equals(lists[j])) {
+					if (hobby[i].equals(lists[j])) {
 						hb[j] = '1';
 						break;
 					}
 				}
 			}
-			
+			// 10001
 			pstmt.setString(8, new String(hb));
-			//////////////////////////////////////////////////
-			
+			/////////////////////////////////
 			pstmt.setString(9, bean.getJob());
 			pstmt.setString(10, bean.getId());
 			if(pstmt.executeUpdate()==1)
@@ -223,7 +211,16 @@ public class MemberMgr {
 			pool.freeConnection(con, pstmt);
 		}
 		return flag;
-		
 	}
-		
 }
+
+
+
+
+
+
+
+
+
+
+

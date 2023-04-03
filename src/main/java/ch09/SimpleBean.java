@@ -17,4 +17,7 @@ public class SimpleBean {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	
+	
+
 }

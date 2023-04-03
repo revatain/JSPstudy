@@ -4,19 +4,22 @@
 <%@page import="ch09.MyUtil"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <%
-	int num = 0;
-	TeamBean bean = null;
-	if(request.getParameter("num")==null) {
-		response.sendRedirect("teamList.jsp");
-		return;
-	} else if(!MyUtil.isNumeric(request.getParameter("num"))){
-		response.sendRedirect("teamList.jsp");
-		return;
-	} else {
-		num = MyUtil.parseInt(request, "num");
-		TeamMgr mgr = new TeamMgr();
-		bean = mgr.getTeam(num);
-	}
+		//teamList.jsp에서 num값을 넘겨 처리해야함
+		int num = 0;
+		TeamBean bean = null;
+		if(request.getParameter("num")==null){
+			//num값이 넘어 오지 않음
+			response.sendRedirect("teamList.jsp");
+			return;
+		}else if(!MyUtil.isNumeric(request.getParameter("num"))){
+			//num값이 숫자 형태로 넘어 오지 않음
+			response.sendRedirect("teamList.jsp");
+			return;
+		}else{
+			num = MyUtil.parseInt(request, "num");
+			TeamMgr mgr = new TeamMgr();
+			bean = mgr.getTeam(num);
+		}
 %>
 <!DOCTYPE html>
 <html>
@@ -53,7 +56,12 @@
 <a href="teamList.jsp">LIST</a>&nbsp;&nbsp;
 <a href="teamInsert.jsp">INSERT</a>&nbsp;&nbsp;
 <a href="teamUpdate.jsp?num=<%=num%>">UPDATE</a>&nbsp;&nbsp;
-<a href="teamDelete.jsp?num=<%=num%>" >DELETE</a>&nbsp;&nbsp;
+<a href="teamDelete.jsp?num=<%=num%>">DELETE</a>&nbsp;&nbsp;
 </div>
 </body>
 </html>
+
+
+
+
+

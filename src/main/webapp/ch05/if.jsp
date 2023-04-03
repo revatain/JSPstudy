@@ -2,18 +2,25 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%
 		request.setCharacterEncoding("UTF-8");
-		//if.html에서 name, color 던짐
+		//if.html에서 name, color은 던짐
 		String name = request.getParameter("name");
 		String color = request.getParameter("color");
 		String msg = "";
 		if(color.equals("blue")){
-		}else if (color.equals("red")){
-		}else if (color.equals("orange")){
-		}else {
+			msg = "파란색";
+		}else if(color.equals("red")){
+			msg = "빨간색";
+		}else if(color.equals("orange")){
+			msg = "오렌지색";
+		}else{
 			msg = "기타";
 			color = "white";
 		}
 %>
-<body bgcolor="<%=color %>">
+<body bgcolor="<%=color%>">
+<%=name %>님이 좋아하는 색상은 <%=color%>입니다.
 </body>
-<%=name %>님이 좋아하는 색상은 <%=color %>입니다.
+
+
+
+

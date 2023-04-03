@@ -26,7 +26,7 @@
 				<td bgcolor="#F5F5F5"><font size="4"><b>글올리기</b></font></td>
 			</tr>
 		</table>
-		<form name="postFrm" method="post" action="postGuestBookProc.jsp">
+		<form name="postFrm" method="get" action="postGuestBookProc.jsp">
 			<table border="1" bordercolor="#000000" cellspacing="0" cellpadding="0">
 				<tr>
 					<td>
