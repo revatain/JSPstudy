@@ -1,16 +1,16 @@
 <!-- ch09/teamList.jsp -->
-<%@page import="ch09.TeamBean"%>
 <%@page import="java.util.Vector"%>
+<%@page import="ch09.TeamBean" %>
 <%@page contentType="text/html; charset=UTF-8"%>
 <jsp:useBean id="mgr" class="ch09.TeamMgr"/>
 <%
-		Vector<TeamBean> vlist = mgr.listTeam();
-		//out.println(vlist.size());
+	Vector<TeamBean> vlist=mgr.listTeam();
+	//out.println(vlist.size());
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Team Mgr</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 <div align="center">
 <h1>Team List</h1>
 <table border="1">
-		<tr>
+	<tr>
 			<th>번호</th>
 			<th>이름</th>
 			<th>사는곳</th>
@@ -26,36 +26,23 @@
 			<th>팀명</th>
 	</tr>
 	<%
-			for(int i=0;i<vlist.size();i++){
-				TeamBean bean = vlist.get(i);
-	%>	
+		for(int i=0; i<vlist.size(); i++)
+		{
+			TeamBean bean=vlist.get(i);
+	%>
 	<tr align="center">
 		<td><%=bean.getNum() %></td>
-		<td>
-			<a href="teamRead.jsp?num=<%=bean.getNum()%>"><%=bean.getName() %></a>
-		</td>
-		<td><%=bean.getCity() %> </td>
-		<td><%=bean.getAge() %> </td>
-		<td><%=bean.getTeam() %> </td>
-	</tr>			
-	<% 
-			}//--for
+		<td><a href="teamRead.jsp?num=<%=bean.getNum()%>"><%=bean.getName()%></a></td>
+		<td><%=bean.getCity() %></td>
+		<td><%=bean.getAge() %></td>
+		<td><%=bean.getTeam() %></td>
+	</tr>
+	<%
+		}
 	%>
+	
 </table><p>
-<a href="teamInsert.jsp">INSERT</a>
+<a href="teamInsert.html">INSERT</a>
 </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-

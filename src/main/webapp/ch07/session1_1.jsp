@@ -1,25 +1,22 @@
 <!-- ch07/session1_1.jsp -->
 <%@page contentType="text/html; charset=UTF-8"%>
 <%
-		String season = request.getParameter("season");
-		String fruit = request.getParameter("fruit");
-		
-		String id = (String)session.getAttribute("idKey");
-		int intervalTime = session.getMaxInactiveInterval();
-		if(id!=null){
+	String season=request.getParameter("season");
+	String fruit=request.getParameter("fruit");
+	
+	String id=(String)session.getAttribute("idKey");
+	int intervalTime=session.getMaxInactiveInterval();
+	if (id!=null)
+	{
+		%>
+<b>		<%=id%></b>님이 좋아하는 계절과 과일은<p>
+<b>     <%=season %></b>과 <b><%=fruit %></b>입니다.<p>
+세션ID:<%=session.getId() %><br>
+세션 유지시간:<%=intervalTime %>
+		<%
+	}
+	else
+	{
+		out.println("세션의 시간이 경과를 하였거나 다른이유로 연결 할 수 없습니다.");
+	}
 %>
-<b><%=id%></b>님이 좋아하는 계절과 과일은<p>
-<b><%=season%></b>과 <b><%=fruit%></b>입니다.<p>
-세션ID : <%=session.getId()%><br>
-세션 유지 시간 : <%=intervalTime%>초
-<%			
-		}else{
-			out.println("세션의 시간이 경과를 하였거나 다른 이유로 연결을 할 수가 없습니다.");
-		}
-%>
-
-
-
-
-
-

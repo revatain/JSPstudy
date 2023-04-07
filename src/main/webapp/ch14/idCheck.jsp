@@ -1,10 +1,10 @@
-<!-- idCheck.jsp -->
 <%@page contentType="text/html; charset=UTF-8"%>
 <jsp:useBean id="mgr" class="ch14.MemberMgr"/>
+
 <%
-		String id = request.getParameter("id");
-		boolean result = mgr.checkId(id);
-		//out.print(result);
+	String id=request.getParameter("id");
+	boolean result=mgr.checkId(id);
+	//out.print(result);
 %>
 <!doctype html>
 <html>

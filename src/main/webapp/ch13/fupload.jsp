@@ -6,7 +6,7 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 <script>
 	function check() {
-		frm = document.forms[0];
+		frm=document.forms[0];
 		if(frm.upFile.value==0){
 			alert("파일을 선택하세요.");
 			return;

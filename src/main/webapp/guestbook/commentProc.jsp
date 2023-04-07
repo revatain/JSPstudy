@@ -5,18 +5,19 @@
 <jsp:useBean id="cbean" class="guestbook.CommentBean"/>
 <jsp:setProperty property="*" name="cbean"/>
 <%
-		String flag = request.getParameter("flag");
-		String method = request.getMethod();
-		//System.out.println("method : " + method);
-		if(method.equalsIgnoreCase("POST")){
-			if(flag.equals("insert")){
-				cmgr.insertComment(cbean);
-			}else if(flag.equals("delete")){
-				cmgr.deleteComment(cbean.getCnum());
-			}
+	String flag=request.getParameter("flag");
+	String method=request.getMethod();
+	//System.out.println("method:"+method);
+	if(method.equalsIgnoreCase("POST"))
+	{
+		if(flag.equals("insert"))
+		{
+			cmgr.insertComment(cbean);
 		}
-		response.sendRedirect("showGuestBook.jsp");
+		else if(flag.equals("delete"))
+		{
+			cmgr.deleteComment(cbean.getCnum());
+		}
+	}
+	response.sendRedirect("showGuestBook.jsp");
 %>
-
-
-

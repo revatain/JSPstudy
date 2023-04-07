@@ -5,6 +5,7 @@
 <%@page import="java.io.File"%>
 <%@page import="ch15.BoardMgr"%>
 <%
+		//request.setCharacterEncoding("UTF-8");
 		try{
 			String filename = request.getParameter("filename");
 			File file = new File(BoardMgr.SAVEFOLDER+

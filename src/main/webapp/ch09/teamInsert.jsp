@@ -1,8 +1,8 @@
 <!-- ch09/teamInsert.jsp -->
 <%@page import="java.util.Vector"%>
 <%@page contentType="text/html; charset=UTF-8"%>
-<jsp:useBean id="mgr" class="ch09.TeamMgr"/>
-<% 
+<jsp:useBean id="mgr" class= "ch09.TeamMgr"/>
+<%
 		Vector<String> vlist = mgr.teamList();
 %>
 <!DOCTYPE html>
@@ -12,52 +12,50 @@
 <title>Team Mgr</title>
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-	function check() {
-		f = document.frm;
-		if(f.name.value==""){
-			alert("이름 입력하세요");
-			f.name.focus();
-			return;//함수 빠져나옴
-		}
-		if(f.city.value==""){
-			alert("사는곳 입력하세요");
-			f.city.focus();
-			return;//함수 빠져나옴
-		}
-		if(f.age.value==""){
-			alert("나이 입력하세요");
-			f.age.focus();
-			return;//함수 빠져나옴
-		}
-		if(f.team.value==""){
-			alert("팀 입력하세요");
-			f.team.focus();
-			return;//함수 빠져나옴
-		}
-		f.submit();//제출
+function check() {
+	f = document.frm;
+	if(f.name.value=="") {
+		alert("이름 입력하세요");
+		f.name.focus();
+		return;
+	}
+	if(f.city.value=="") {
+		alert("사는곳 입력하세요");
+		f.city.focus();
+		return;
 	}
 
-	function check2() {
-		document.frm.action = "teamInsertProc2.jsp";
-		document.frm.submit();
+	if(f.age.value=="") {
+		alert("나이 입력하세요");
+		f.age.focus();
+		return;
 	}
 	
-	function selectTeam() {
-		//select의 name을 id로 변경
-		teamselect = document.getElementById("teamselect");
-		team = teamselect.options[teamselect.selectedIndex].value;  
-		document.frm.team.value = team;
+	if(f.team.value=="") {
+		alert("이름 입력하세요");
+		f.team.focus();
+		return;
 	}
+	f.submit();
+}
+
+function check2() {
+	document.frm.action = "teamInsertProc2.jsp";
+	document.frm.submit();
+}
+function selectTeam() {
+	teamselect = document.getElementByName("teamselect");
+	team = teamselect.options[teamselect.selectedIndex].value;
+	// alert(team);
+	document.frm.team.value = team;
 	
-	function selectTeam1(team) {
-		document.frm.team.value = team;
-	}
+}
 </script>
 </head>
 <body>
-<div align="center">
+<div align = "center">
 <h1>Team Insert</h1>
-<form name="frm" method="post" action="teamInsertProc.jsp">
+<form name = "frm" method = "post" action="teamInsertProc.jsp">
 <table border="1">
 <tr>
 	<td width="50" align="center">이름</td>
@@ -73,13 +71,15 @@
 </tr>
 <tr>
 	<td align="center">팀명</td>
-	<td>
-		<input name="team" size="10">
-		<select id="teamselect" onchange="selectTeam1(this.value)">
-		<%for(int i=0;i<vlist.size();i++){%>
-			<option value="<%=vlist.get(i)%>"><%=vlist.get(i)%></option>
-		<%}%>
-		</select>
+	<td><input name="team"  size ="10">
+	<select id="teamselect"  onchange="selectTeam()">
+	<%
+			for(int i = 0; i<vlist.size(); i++) {%>
+			<option value="<%=vlist.get(i)%>"><%=vlist.get(i)%>
+			
+			</option>
+			<% }%>
+	</select>
 	</td>
 </tr>
 <tr>
@@ -90,12 +90,7 @@
 </tr>
 </table>
 </form><p>
-<a href="teamList.jsp">LIST</a>
+<a href = "teamInsert.jsp">INSERT</a>
 </div>
 </body>
 </html>
-
-
-
-
-

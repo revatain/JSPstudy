@@ -1,48 +1,46 @@
-<!-- read.jsp -->
 <%@page import="java.util.Vector"%>
 <%@page import="ch15.BCommentBean"%>
-<%@page import="ch15.BoardBean"%>
 <%@page import="ch15.UtilMgr"%>
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@page import="ch15.BoardBean"%>
 <jsp:useBean id="mgr" class="ch15.BoardMgr"/>
 <jsp:useBean id="cmgr" class="ch15.BCommentMgr"/>
+
+<%@page contentType="text/html; charset=UTF-8"%>
 <%
-		//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=3
-		String nowPage = request.getParameter("nowPage");
-		String numPerPage = request.getParameter("numPerPage");
-		String keyField = request.getParameter("keyField");
-		String keyWord = request.getParameter("keyWord");
-		int num = UtilMgr.parseInt(request, "num");
-		
-		String flag = request.getParameter("flag");
-		if(flag!=null){
-			if(flag.equals("insert")){
-				BCommentBean cbean = new BCommentBean();
-				cbean.setNum(num);
-				cbean.setName(request.getParameter("cName"));
-				cbean.setComment(request.getParameter("comment"));
-				cmgr.insertBComment(cbean);
-			}else if(flag.equals("delete")){
-				cmgr.deleteBComment(UtilMgr.parseInt(request, "cnum"));
-			}
-		}else{
-			// list.jsp 읽음 -> 이때만 조회수 증가
-			mgr.upCount(num);
+	//read.jsp?nowPage=1&numPerPage=10&keyField=&keyWord=&num=2
+	String nowPage=request.getParameter("nowPage");
+	String numPerPage=request.getParameter("numPerPage");
+	String keyField=request.getParameter("keyField");
+	String keyWord=request.getParameter("keyWord");
+	int num=UtilMgr.parseInt(request,"num");
+	//댓글기능:insert,delete
+	String flag=request.getParameter("flag");
+	if(flag!=null){
+		if(flag.equals("insert")){
+			BCommentBean cbean=new BCommentBean();
+			cbean.setNum(num);//어떤게시물
+			cbean.setName(request.getParameter("cName"));
+			cbean.setComment(request.getParameter("comment"));
+			cmgr.insertBComment(cbean);
+		}else if(flag.equals("delete")){
+			cmgr.deleteBComment(UtilMgr.parseInt(request,"cnum"));
 		}
-		
-		
-		BoardBean bean = mgr.getBoard(num);
-		
-		String name = bean.getName();
-		String subject = bean.getSubject();
-		String regdate = bean.getRegdate();
-		String content = bean.getContent();
-		String filename = bean.getFilename();
-		int filesize = bean.getFilesize();
-		String ip = bean.getIp();
-		int count = bean.getCount();	
-		//읽어온 게시물을 수정, 삭제를 위해서 세션에 저장
-		session.setAttribute("bean", bean);
+	}else{
+		//list.jsp에서 게시물읽어옴:이때만조회수증가
+		mgr.upCount(num);
+	}
+	BoardBean bean=mgr.getBoard(num);
+	//out.println(bean.getSubject()+":"+bean.getCount());
+	String name = bean.getName();
+	String subject = bean.getSubject();
+	String regdate = bean.getRegdate();
+	String content = bean.getContent();
+	String filename = bean.getFilename();
+	int filesize = bean.getFilesize();
+	String ip = bean.getIp();
+	int count = bean.getCount();
+	//읽어온 게시물을 수정,삭제를 위해서 세션에 저장
+	session.setAttribute("bean",bean);
 %>
 <!DOCTYPE html>
 <html>
@@ -58,11 +56,11 @@
 		document.downFrm.filename.value=filename;
 		document.downFrm.submit();
 	}
-	function delFn() {
-		const pass = document.getElementById("passId");
+	function delFn(){
+		const pass=document.getElementById("passId");
 		//alert(pass.value);
 		if(pass.value.length==0){
-			alert("비밀번호 입력하세요");
+			alert("비밀번호 입력하세요.");
 			pass.focus();
 			return;
 		}
@@ -107,25 +105,24 @@
      <td align="center" bgcolor="#DDDDDD">첨부파일</td>
      <td bgcolor="#FFFFE8" colspan="3">
 		<%if(filename!=null&&!filename.equals("")){ %>
-		<a href="javascript:down('<%=filename%>')"><%=filename%></a>
-		<font color="blue">
-		(<%=UtilMgr.intFormat(filesize)%>bytes)
-		</font>
-		<%}else{ out.println("첨부된 파일이 없습니다.");}%>
+			<a href="javascript:down('<%=filename%>')"><%=filename %></a>
+			<font color="blue">(<%=UtilMgr.intFormat(filesize)%>)</font>
+		<%}else { out.println("첨부된 파일이 없습니다."); }%>
      </td>
    </tr>
-   <tr> 
+    <tr> 
     <td align="center" bgcolor="#DDDDDD">비밀번호</td>
     <td bgcolor="#FFFFE8" colspan="3">
     	<input type="password" name="pass" id="passId">
     </td>
-   </tr>
+  </tr>
+   
    <tr> 
     <td colspan="4"><br/><pre><%=content%></pre><br/></td>
    </tr>
    <tr>
     <td colspan="4" align="right">
-    IP 주소 : <%=ip%> /  조회수  <%=count%>
+     IP주소:<%=ip%>로 부터 글을 남기셨습니다./  조회수  <%=count%>
     </td>
    </tr>
    </table>
@@ -133,8 +130,8 @@
  </tr>
  <tr>
   <td align="center" colspan="2">
-	<!-- 댓글 입력폼 Start -->
-  	 <form method="post" name="cFrm">
+  <!-- 댓글 입력폼 Start -->
+      <form method="post" name="cFrm">
 		<table>
 			<tr  align="center">
 				<td width="50">이 름</td>
@@ -159,23 +156,22 @@
     <input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<%}%>
 	</form>
- 	<!-- 댓글 입력폼 End -->
+  <!-- 댓글 입력폼 End -->
  <hr/>
-	<!-- 댓글 List Start -->
-	<%
-			Vector<BCommentBean> cvlist = cmgr.getBComment(num);
-			if(!cvlist.isEmpty()){
-				// out.println(cvlist.size());
-			
-	%>
-	<table>
-	<%
-				for(int i = 0; i<cvlist.size(); i++) {
-					BCommentBean cbean = cvlist.get(i);
-					int cnum = cbean.getCnum();
-					String cname = cbean.getName();
-					String comment = cbean.getComment();
-					String cregdate = cbean.getRegdate();
+ <!-- 댓글 List Start -->
+<%
+	Vector<BCommentBean> cvlist=cmgr.getBComment(num);
+	if(!cvlist.isEmpty()){
+		//out.println(cvlist.size());
+%>
+<table>
+	<% 
+	for(int i=0; i<cvlist.size(); i++){
+		BCommentBean cbean=cvlist.get(i);
+		int cnum=cbean.getCnum();
+		String cname=cbean.getName();
+		String comment=cbean.getComment();
+		String cregdate=cbean.getRegdate();
 	%>
 	<tr>
 			<td colspan="3" width="600"><b><%=cname%></b></td>
@@ -190,10 +186,14 @@
 	<tr>
 		<td colspan="3"><br></td>
 	</tr>
-	<%}%>	
-	</table>
+	
 	<%}%>
-	<!-- 댓글 List End -->
+	
+</table>
+<%
+	}//if
+%>
+ <!-- 댓글 List End -->
  [ <a href="javascript:list()" >리스트</a> | 
  <a href="update.jsp?nowPage=<%=nowPage%>&num=<%=num%>&numPerPage=<%=numPerPage%>" >수 정</a> |
  <a href="reply.jsp?nowPage=<%=nowPage%>&numPerPage=<%=numPerPage%>" >답 변</a> |
@@ -213,7 +213,6 @@
 	<input type="hidden" name="keyWord" value="<%=keyWord%>">
 	<%}%>
 </form>
-
 <form name="delFrm" action="boardDelete" method="post">
 	<input type="hidden" name="nowPage" value="<%=nowPage%>">
 	<input type="hidden" name="numPerPage" value="<%=numPerPage%>">
@@ -225,9 +224,3 @@
 </form>
 </body>
 </html>
-
-
-
-
-
-

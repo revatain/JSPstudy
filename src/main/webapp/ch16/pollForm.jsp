@@ -3,7 +3,7 @@
 <%@page import="ch16.PollListBean"%>
 <%@page import="ch16.UtilMgr"%>
 <%@page contentType="text/html; charset=UTF-8"%>
-<jsp:useBean id="mgr" class ="ch16.PollMgr"/>
+<jsp:useBean id="mgr" class="ch16.PollMgr"/>
 <%
 		int num = 0;
 		if(request.getParameter("num")!=null){
@@ -14,8 +14,8 @@
 		String question = plBean.getQuestion();
 		int type = plBean.getType();
 		int active = plBean.getActive();
-		int sumCount = 0;
-		// out.print(question + " : " + vItem.size());
+		int sumCount = 0;//미구현
+		//out.print(question + " : " + vItem.size());
 %>
 <form action="pollFormProc.jsp"> 
 <table border="1">
@@ -56,3 +56,11 @@
 </table>	
 <input type="hidden" name="num" value="<%=num%>">
 </form>
+
+
+
+
+
+
+
+

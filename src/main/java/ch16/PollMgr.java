@@ -160,16 +160,108 @@ public class PollMgr {
 	}
 	
 	// Count sum : 설문 투표수
-	
+	public int sumCount(int listNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int sum = 0;
+		try {
+			con = pool.getConnection();
+			sql = "select sum(count) from tblPollItem where listNum = ?";
+			pstmt = con.prepareStatement(sql);
+			if(listNum==0) listNum = getMaxNum();
+			pstmt.setInt(1, listNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) sum = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return sum;
+	}
 	
 	// Poll Update : 투표 실행
+	public boolean updatePoll(int listNum, String itemNum[]) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		boolean flag = false;
+		try {
+			con = pool.getConnection();
+			sql = "update tblPollItem set count = count + 1 "
+					+ "where listNum = ? and itemNum = ?";
+			pstmt = con.prepareStatement(sql);
+			if(listNum==0) listNum = getMaxNum();
+			for (int i = 0; i < itemNum.length; i++) {
+				pstmt.setInt(1, listNum);
+				pstmt.setInt(2, Integer.parseInt(itemNum[i]));
+				if(pstmt.executeUpdate()==1)
+					flag = true;
+			}
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		return flag;
+	}
 	
 	
 	// Poll view : 결과보기
-	
+	public Vector<PollItemBean> getView(int listNum){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		Vector<PollItemBean> vlist = new Vector<PollItemBean>();
+		try {
+			con = pool.getConnection();
+			sql = "select item, count from tblPollItem "
+					+ "where listNum=?";
+			pstmt = con.prepareStatement(sql);			
+			pstmt.setInt(1, listNum==0?getMaxNum():listNum);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PollItemBean piBean = new PollItemBean();
+				String item[] = new String[1];
+				item[0] = rs.getString("item");
+				piBean.setItem(item);
+				piBean.setCount(rs.getInt("count"));
+				vlist.addElement(piBean);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vlist;
+	}
 	
 	// Max Item Count : 아이템 중에 가장 높은 투표값
-	
+	public int getMaxCount(int listNum) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		int maxCnt = 0;
+		try {
+			con = pool.getConnection();
+			sql = "select max(count) from tblPollItem where listNum = ?";
+			pstmt = con.prepareStatement(sql);
+			if(listNum==0) listNum = getMaxNum();
+			pstmt.setInt(1, listNum==0?getMaxNum():listNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) maxCnt = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return maxCnt;
+	}
 	
 	
 }

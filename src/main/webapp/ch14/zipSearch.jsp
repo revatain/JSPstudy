@@ -3,16 +3,19 @@
 <%@page import="java.util.Vector"%>
 <%@page contentType="text/html; charset=UTF-8"%>
 <jsp:useBean id="mgr" class="ch14.MemberMgr"/>
+
 <%
-		String search = request.getParameter("search");
-		Vector<ZipcodeBean> vlist = new Vector<ZipcodeBean>();
-		//search값이 y는 검색, n은 창만 open 
-		String area3 = null;
-		if(search.equals("y")){
-			area3 = request.getParameter("area3");
-			vlist = mgr.searchZipcode(area3);
-			//out.print(vlist.size());
-		}
+	String search=request.getParameter("search");
+	Vector<ZipcodeBean> vlist=null;
+	//search값이 y는 검색 n은 창만 open
+	String area3=null;
+	if(search.equals("y"))
+	{
+		area3=request.getParameter("area3");
+		vlist=mgr.searchZipcode(area3);
+		out.print(vlist.size());
+	}
+	
 %>
 <!doctype html>
 <html>
@@ -30,8 +33,8 @@
 		frm.submit();
 	}
 	function sendAdd(zipcode, adds) {
-		//alert(zipcode + " " + adds);
-		//opener -> member.jsp
+		//alert(zipcode+" "+adds);
+		//opener->member.jsp
 		opener.document.regFrm.zipcode.value=zipcode;
 		opener.document.regFrm.address.value=adds;
 		self.close();
@@ -45,36 +48,43 @@
 			<table>
 				<tr>
 					<td>
-					<br/>도로명 입력 : 	<input name="area3" value="강남대로">
+					<br/>도로명 입력 : 	<input name="area3">
 						<input type="button" value="검색" onclick="loadSearch()">
 					</td>
 				</tr>
 				<!-- 검색 결과 Start -->
 				<%
-						if(search.equals("y")){
-							if(vlist.isEmpty()){
+					if(search.equals("y"))
+					{
+						if(vlist.isEmpty())
+						{
 				%>
 				<tr>
 					<td align="center"><br>검색된 결과가 없습니다.</td>
 				</tr>
-				<%}else{%>
-				<tr>
-					<td align="center"><br>※검색 후, 아래 주소를 클릭하면 자동으로 입력됩니다.</td>
-				</tr>	
-				<%		
-						for(int i=0;i<vlist.size();i++){
-								ZipcodeBean bean = vlist.get(i);
-								String zipcode = bean.getZipcode();
-								String adds = bean.getArea1()+" ";
-								adds+= bean.getArea2() +" ";
-								adds+= bean.getArea3() +" ";
+				<% 		
+						}
+						else
+						{
 				%>
 				<tr>
-					<td><a href="#" onclick="sendAdd('<%=zipcode%>','<%=adds%>')">
-					<%=zipcode +" " + adds%></a></td>
+					<td align="center"><br>※검색 후, 아래 주소를 클릭하면 자동으로 입력됩니다.</td>
 				</tr>
-				<%				
-							}//--for
+				<%
+						for(int i=0; i<vlist.size(); i++)
+						{
+							ZipcodeBean bean=vlist.get(i);
+							String zipcode=bean.getZipcode();
+							String adds=bean.getArea1()+" ";
+							adds+=bean.getArea2()+" ";
+							adds+=bean.getArea3()+" ";
+				%>
+				<tr>
+					<td><a href="#" onclick="sendAdd('<%=zipcode%>','<%=adds%>')"><%=zipcode + " " +adds %></a></td>
+				</tr>	
+				<% 			
+						}//for문
+							
 						}//--if2
 					}//--if1
 				%>
@@ -89,8 +99,3 @@
 	</div>
 </body>
 </html>
-
-
-
-
-

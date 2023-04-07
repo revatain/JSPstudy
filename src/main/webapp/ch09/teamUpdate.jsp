@@ -1,14 +1,12 @@
-<!-- ch09/teamUpdate.jsp -->
-<%@page import="ch09.TeamBean"%>
-<%@page import="ch09.MyUtil"%>
-<%@page contentType="text/html; charset=UTF-8"%>
 <jsp:useBean id="mgr" class="ch09.TeamMgr"/>
+<%@page import="ch09.MyUtil"%>
+<%@page import="ch09.TeamBean"%>
+<%@page contentType="text/html; charset=UTF-8"%>
 <%
-		int num = MyUtil.parseInt(request, "num");
-		TeamBean bean = mgr.getTeam(num);
+	int num=MyUtil.parseInt(request, "num");
+	TeamBean bean=mgr.getTeam(num);
+	//response.sendRedirect("teamList.jsp");
 %>
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>Team Mgr</title>
@@ -21,9 +19,7 @@
 <table border="1">
 <tr>
 	<td width="50" align="center">번호</td>
-	<td width="150">
-		<input name="num" value="<%=num%>" readonly>
-	</td>
+	<td width="150"><input name="num" value="<%=num%>" readonly></td>
 </tr>
 <tr>
 	<td width="50" align="center">이름</td>
@@ -43,7 +39,7 @@
 </tr>
 <tr>
 	<td align="center" colspan="2">
-		<%-- <input type="hidden" name="num" value="<%=bean.getNum()%>"> --%>
+		<!-- <input type="hidden" name="num" value="<%=bean.getNum() %>"> -->
 		<input type="submit" value="UPDATE">
 	</td>
 </tr>

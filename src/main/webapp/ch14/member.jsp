@@ -1,4 +1,3 @@
-<!-- member.jsp -->
 <%@page contentType="text/html; charset=UTF-8" %>
 <!doctype html>
 <html>
@@ -13,14 +12,14 @@
 			document.regFrm.id.focus();
 			return;//이후에 코드를 실행이 안됨. 함수를 빠져나감.
 		}
-		url = "idCheck.jsp?id="+id;
-		window.open(url, "ID 중복체크", "width=300, height=150, top=100, left=100");
+		url="idCheck.jsp?id="+id;
+		window.open(url,"ID 중복체크", "width=300, height=150, top=100, left=100" );
+		
 	}
 	
 	function zipSearch() {
-		url = "zipSearch.jsp?search=n";
-		window.open(url, "우편번호검색", "width=500, height=300, top=100, left=100, scrollbars=yes");
-	
+		url="zipSearch.jsp?search=n";
+		window.open(url,"우편번호 검색", "width=500, height=300, top=100, left=100, scrollbars=yes" );
 	}
 </script>
 </head>

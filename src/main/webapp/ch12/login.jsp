@@ -1,14 +1,13 @@
 <!-- ch12/login.jsp -->
 <%@page contentType="text/html; charset=UTF-8"%>
 <%
-	 	String id =  (String)session.getAttribute("idKey");	
-		if(id!=null){
-			//로그인 상태
-%>
-<script>
-	alert("로그인 되었습니다.");
-	location.href = "loginOK.jsp";
-</script>	
+		String id = (String)session.getAttribute("idKey");
+		if(id!=null) {
+			%>
+			<script>
+			alert("로그인 되었습니다.");
+			location.href = "loginOK.jsp";
+			</script>
 <%}%>
 <!DOCTYPE html>
 <html>

@@ -7,37 +7,42 @@
 <link href="style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	function check() {
-		f = document.frm;
-		if(f.name.value==""){
-			alert("이름 입력하세요");
+		f=document.frm;
+		if(f.name.value=="")
+		{
+			alert("이름 입력하세요.");
 			f.name.focus();
-			return;//함수 빠져나옴
+			return;//함수빠져나오기
 		}
-		if(f.city.value==""){
-			alert("사는곳 입력하세요");
-			f.city.focus();
-			return;//함수 빠져나옴
+		if(f.city.value=="")
+		{
+			alert("사는곳 입력하세요.");
+			f.name.focus();
+			return;//함수빠져나오기
 		}
-		if(f.age.value==""){
-			alert("나이 입력하세요");
-			f.age.focus();
-			return;//함수 빠져나옴
+		if(f.age.value=="")
+		{
+			alert("나이 입력하세요.");
+			f.name.focus();
+			return;//함수빠져나오기
 		}
-		if(f.team.value==""){
-			alert("팀 입력하세요");
-			f.team.focus();
-			return;//함수 빠져나옴
+		if(f.team.value=="")
+		{
+			alert("팀 입력하세요.");
+			f.name.focus();
+			return;//함수빠져나오기
 		}
+		
 		f.submit();//제출
 	}
-
 	function check2() {
-		document.frm.action = "teamInsertProc2.jsp";
+		document.frm.action="teamInsertProc2.jsp";
 		document.frm.submit();
 	}
 </script>
 </head>
 <body>
+
 <div align="center">
 <h1>Team Insert</h1>
 <form name="frm" method="post" action="teamInsertProc.jsp">
@@ -65,13 +70,9 @@
 	</td>
 </tr>
 </table>
+<!-- button type은 반드시 onclick 실행 -->
 </form><p>
 <a href="teamList.jsp">LIST</a>
 </div>
 </body>
 </html>
-
-
-
-
-

@@ -7,23 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @WebServlet("/ch15/boardReply")
 public class BoardReplyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		BoardBean reBean = new BoardBean();
 		BoardMgr mgr = new BoardMgr();
+		BoardBean reBean = new BoardBean();
 		reBean.setName(request.getParameter("name"));
 		reBean.setSubject(request.getParameter("subject"));
 		reBean.setContent(request.getParameter("content"));
-		reBean.setRef(Integer.parseInt(request.getParameter("ref")));
-		reBean.setPos(Integer.parseInt(request.getParameter("pos")));
-		reBean.setDepth(Integer.parseInt(request.getParameter("depth")));
+		reBean.setRef(UtilMgr.parseInt(request, "ref"));
+		reBean.setPos(UtilMgr.parseInt(request, "pos"));
+		reBean.setDepth(UtilMgr.parseInt(request, "depth"));
 		reBean.setPass(request.getParameter("pass"));
 		reBean.setIp(request.getParameter("ip"));
+		
 		mgr.replyUpBoard(reBean.getRef(), reBean.getPos());
 		mgr.replyBoard(reBean);
 		
@@ -31,7 +31,6 @@ public class BoardReplyServlet extends HttpServlet {
 		String numPerPage = request.getParameter("numPerPage");
 		response.sendRedirect("list.jsp?nowPage="+nowPage+
 				"&numPerPage="+numPerPage);
-		
 	}
 }
 

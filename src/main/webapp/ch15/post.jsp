@@ -1,4 +1,3 @@
-<!-- post.jsp -->
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +32,7 @@ enctype="multipart/form-data">
 			</tr>
 			<tr>
 				<td>내 용</td>
-				<td><textarea name="content" rows="10" cols="50">내용테스트</textarea></td>
+				<td><textarea name="content" rows="10" cols="50" value="내용테스트"></textarea></td>
 			</tr>
 			<tr>
 				<td>비밀 번호</td>

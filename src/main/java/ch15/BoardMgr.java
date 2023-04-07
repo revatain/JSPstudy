@@ -371,6 +371,3 @@ public class BoardMgr {
 		System.out.println("입력성공");
 	}
 }
-
-
-

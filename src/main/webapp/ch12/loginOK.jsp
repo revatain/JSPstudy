@@ -2,9 +2,9 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%
 		String id = (String)session.getAttribute("idKey");
-		if(id==null){
+		if(id==null) {
 			response.sendRedirect("login.jsp");
-			return;//_jspService 메서드 중간
+			return;
 		}
 %>
 <!DOCTYPE html>

@@ -1,16 +1,17 @@
 <!-- updateGuestBook.jsp -->
-<%@page import="guestbook.GuestBookBean"%>
 <%@page import="guestbook.MyUtil"%>
 <%@page contentType="text/html; charset=UTF-8"%>
-<jsp:useBean id="login" scope="session" class="guestbook.JoinBean"/>
 <jsp:useBean id="mgr" class="guestbook.GuestBookMgr"/>
+<jsp:useBean id="bean" class="guestbook.GuestBookBean"/>
+<jsp:useBean id="login" scope="session" class="guestbook.JoinBean"/>
+<%@page contentType="text/html; charset=UTF-8"%>
 <%
-		int num = 0;
-		GuestBookBean bean = null;
-		if(request.getParameter("num")!=null){
-			num = MyUtil.parseInt(request, "num");
-			bean = mgr.getGuestBook(num);
-		}
+	int num=0;
+	if(request.getParameter("num")!=null)
+	{
+		num=MyUtil.parseInt(request,"num");
+		bean=mgr.getGuestBook(num);
+	}
 %>
 <html>
 <head>
@@ -51,7 +52,7 @@
 								<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
 								<input type="submit" value="글수정"> 
 								<input type="reset" value="고치기"> 
-								<input type="checkbox" name="secret" value="1" 
+								<input type="checkbox" name="secret" value="1"
 								<%if(bean.getSecret().equals("1")) out.print("checked");%>
 								>비밀글
 								</td>
@@ -64,11 +65,3 @@
 	</div>
 </body>
 </html>
-
-
-
-
-
-
-
-
